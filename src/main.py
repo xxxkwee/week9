@@ -17,7 +17,9 @@ from stage_3_aggregate import aggregate_bureau, aggregate_previous_applications,
 from stage_4_validate import validate_final_table
 
 repo_root = Path(CONFIG['paths']['repo_root'])     
-logger.add(Path(repo_root) / CONFIG['paths']['log_dir'] / CONFIG['paths']['log_file'], rotation="10 MB", retention="10 days")
+log_dir = Path(repo_root) / CONFIG['paths']['log_dir']
+log_dir.mkdir(parents=True, exist_ok=True)
+logger.add(log_dir / CONFIG['paths']['log_file'], rotation="10 MB", retention="10 days")
     
 def run_pipeline():
     """Run the entire data pipeline to produce the final data cube using chaining."""
